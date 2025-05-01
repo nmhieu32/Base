@@ -6,24 +6,481 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Base</title>
 
+    <!-- FONT GG -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz@0,14..32;1,14..32&display=swap"
+        rel="stylesheet">
+
+    <!-- TAILWIND -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- ALPINE -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- ANIMATE -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+        integrity="sha512-c42qTSw/wPZ3/5LBzD+Bw5f7bSF2oxou6wEb+I/lqeaKV5FDIfMvvRp772y4jcJLKuGUOpbJMdg/BTl50fJYAw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- FLOWBITE -->
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 
-<body>
-    
+<body x-data="{ page: 'home', 'darkMode': true, 'stickyMenu': false, 'navigationOpen': false, 'scrollTop': false }"
+    x-init="
+     darkMode = JSON.parse(localStorage.getItem('darkMode'));
+     $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))"
+    :class="{'b bg-[rgb(24_28_49/1)]': darkMode === true}" style="height: 100%;" class="text-[rgb(121_128_138)]">
+
     <!-- HEADER -->
-    <header></header>
+    <header class="w-[100%] pt-[1.75rem] pb-[1.75rem] top-0 left-0 fixed z-99999"
+        :class="{ 'bg-[rgb(255_255_255/1)] bg-[rgb(24_28_49/1)] !shadow-sm py-[1rem] transition-all duration-150 ease-in-out duration-100' : stickyMenu }"
+        @scroll.window="stickyMenu = (window.pageYOffset > 20) ? true : false">
+        <div
+            class="mx-auto max-w-[86.874rem] px-[1rem] md:px-[2rem] 2xl:px-0 lg:flex items-center justify-between relative">
+            <div class="w-[100%] lg:w-[25%] flex items-center justify-between">
+                <a href="./index.html">
+                    <img class="block" src="./img/logo-light.svg" alt="Light">
+                    <img class="hidden" src="./img/logo-dark.svg" alt="Dark">
+                </a>
+                <button class="lg:hidden block" @click="navigationOpen = !navigationOpen">
+                    <span class="block relative cursor-pointer w-[1.375rem] h-[1.375rem]">
+                        <span class="du-block absolute right-0 w-[100%] h-[100%]">
+                            <span
+                                class="block relative top-0 left-0 bg-[rgb(24_28_49/1)] rounded-[0.125rem] w-0 h-[0.125rem] my-[0.25rem] ease-in-out duration-200 delay-0"
+                                :class="{ '!w-[100%] delay-300': !navigationOpen }"></span>
+                            <span
+                                class="block relative top-0 left-0 bg-[rgb(24_28_49/1)] rounded-[0.125rem] w-0 h-[0.125rem] my-[0.25rem] ease-in-out duration-200 delay-150"
+                                :class="{ '!w-[100%] qr': !navigationOpen }"></span>
+                            <span
+                                class="block relative top-0 left-0 bg-[rgb(24_28_49/1)] rounded-[0.125rem] w-0 h-[0.125rem] my-[0.25rem] ease-in-out duration-200 delay-200"
+                                :class="{ '!w-[100%] delay-500': !navigationOpen }"></span>
+                        </span>
+                        <span class="du-block absolute right-0 w-[100%] h-[100%] rotate-45 transform">
+                            <span
+                                class="block bg-[rgb(24_28_49/1)] rounded-[0.125rem] ease-in-out duration-200 delay-300 absolute left-[0.625rem] top-0 w-[0.125rem] h-[100%]"
+                                :class="{ 'h-0 delay-0': !navigationOpen }"></span>
+                            <span
+                                class="block bg-[rgb(24_28_49/1)] rounded-[0.125rem] ease-in-out duration-200 qr absolute left-0 top-[0.625rem] w-[100%] h-[0.125rem]"
+                                :class="{ 'h-0 rr': !navigationOpen }"></span>
+                        </span>
+                    </span>
+                </button>
+            </div>
+            <div class="w-[100%] lg:w-[75%] h-[0px] lg:h-auto invisible lg:!visible lg:flex items-center justify-between"
+                :class="{ '!visible bg-[rgb(255_255_255/1)] bg-[rgb(28_33_54/1)] !h-auto max-h-[400px] overflow-y-scroll rounded-[0.375rem] mt-[1rem] p-[1.875rem]': navigationOpen }">
+                <nav>
+                    <ul class="flex lg:items-center flex-col lg:flex-row gap-[1.25rem] lg:gap-[2.5rem]">
+                        <li>
+                            <a href="./index.html" class="hover:text-[rgb(78_107_255/1)]"
+                                :class="{ 'text-[rgb(78_107_255/1)]': page === 'home' }">Home</a>
+                        </li>
+                        <li>
+                            <a href="./index.html" class="hover:text-[rgb(78_107_255/1)]">Features</a>
+                        </li>
+                        <li class="relative group" x-data="{ dropdown: false }">
+                            <a href="#"
+                                class="hover:text-[rgb(78_107_255/1)] flex items-center justify-between gap-[0.75rem]"
+                                @click.prevent="dropdown = !dropdown"
+                                :class="{ 'text-[rgb(78_107_255/1)]': page === 'blog-grid' || page === 'blog-single' || page === 'signin' || page === 'signup' || page === '404' || }">Pages
+                                <svg :class="{ 'fill-[#4E6BFF]': dropdown }"
+                                    class="fill-[#79808A] group-hover:fill-[#4E6BFF] w-[0.75rem] h-[0.75rem] cursor-pointer"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <path
+                                        d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z" />
+                                </svg>
+                            </a>
+                            <ul class="left-[-1.875rem] mt-[0.5rem] hidden min-w-max flex-col gap-[1rem] rounded-[0.375rem] border border-[rgb(216_225_237/1)] bg-[rgb(255_255_255/1)] pl-[2rem] pr-[2rem] pt-[1.25rem] pb-[1.25rem] shadow-lg duration-300 ease-in lg:invisible lg:absolute lg:mt-0 lg:flex lg:w-[250px] lg:translate-y-[2.5rem] lg:transform lg:opacity-[0] lg:before:absolute lg:before:top-[-0.375rem] lg:before:left-[2.5rem] lg:before:size-[0.75rem] lg:before:rotate-45 lg:before:transform lg:before:border-l lg:before:border-t lg:before:border-[rgb(216_225_237/1)] lg:before:content lg:before:bg-[rgb(255_255_255/1)] lg:group-hover:visible lg:group-hover:translate-y-[1.625rem] lg:group-hover:transform lg:group-hover:opacity-[1]"
+                                :class="{ 'flex': dropdown}">
+                                <li>
+                                    <a href="#" class="hover:text-[rgb(78_107_255/1)]"
+                                        :class="{ 'text-[rgb(78_107_255/1)]': page === 'blog-grid' }">Blog Grid</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="hover:text-[rgb(78_107_255/1)]"
+                                        :class="{ 'text-[rgb(78_107_255/1)]': page === 'blog-single' }">Blog Single</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="hover:text-[rgb(78_107_255/1)]"
+                                        :class="{ 'text-[rgb(78_107_255/1)]': page === 'signin' }">Sign In</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="hover:text-[rgb(78_107_255/1)]"
+                                        :class="{ 'text-[rgb(78_107_255/1)]': page === 'signup' }">Sign Up</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="hover:text-[rgb(78_107_255/1)]"
+                                        :class="{ 'text-[rgb(78_107_255/1)]': page === '404' }">404</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" class="hover:text-[rgb(78_107_255/1)]">Support</a>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="flex items-center gap-[1.5rem] mt-[1.75rem] lg:mt-0">
+                    <div class="mr-[0.375rem] absolute lg:static top-[0.625rem] right-[4.25rem]"
+                        :class="navigationOpen ? '!-ud-visible' : '!visible'">
+                        <label class="block m-0 relative">
+                            <input type="checkbox" :value="darkMode" @change="darkMode = !darkMode"
+                                class="cursor-pointer w-[100%] h-[100%] opacity-[0] absolute top-0 z-50 m-0">
+                            <svg :class="{ 'md:fill-[#FFFFFF]' : page === 'home', '!fill-[#79808A]' : page === 'home' && stickyMenu }"
+                                class="fill-[#79808A] hidden" width="25" height="25" viewBox="0 0 25 25" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M12.0908 18.6363C10.3549 18.6363 8.69 17.9467 7.46249 16.7192C6.23497 15.4916 5.54537 13.8268 5.54537 12.0908C5.54537 10.3549 6.23497 8.69 7.46249 7.46249C8.69 6.23497 10.3549 5.54537 12.0908 5.54537C13.8268 5.54537 15.4916 6.23497 16.7192 7.46249C17.9467 8.69 18.6363 10.3549 18.6363 12.0908C18.6363 13.8268 17.9467 15.4916 16.7192 16.7192C15.4916 17.9467 13.8268 18.6363 12.0908 18.6363ZM12.0908 16.4545C13.2481 16.4545 14.358 15.9947 15.1764 15.1764C15.9947 14.358 16.4545 13.2481 16.4545 12.0908C16.4545 10.9335 15.9947 9.8236 15.1764 9.00526C14.358 8.18692 13.2481 7.72718 12.0908 7.72718C10.9335 7.72718 9.8236 8.18692 9.00526 9.00526C8.18692 9.8236 7.72718 10.9335 7.72718 12.0908C7.72718 13.2481 8.18692 14.358 9.00526 15.1764C9.8236 15.9947 10.9335 16.4545 12.0908 16.4545ZM10.9999 0.0908203H13.1817V3.36355H10.9999V0.0908203ZM10.9999 20.8181H13.1817V24.0908H10.9999V20.8181ZM2.83446 4.377L4.377 2.83446L6.69082 5.14828L5.14828 6.69082L2.83446 4.37809V4.377ZM17.4908 19.0334L19.0334 17.4908L21.3472 19.8046L19.8046 21.3472L17.4908 19.0334ZM19.8046 2.83337L21.3472 4.377L19.0334 6.69082L17.4908 5.14828L19.8046 2.83446V2.83337ZM5.14828 17.4908L6.69082 19.0334L4.377 21.3472L2.83446 19.8046L5.14828 17.4908ZM24.0908 10.9999V13.1817H20.8181V10.9999H24.0908ZM3.36355 10.9999V13.1817H0.0908203V10.9999H3.36355Z"
+                                    fill="" />
+                            </svg>
+                            <img class="hidden block" src="./img/icon-moon.svg" alt="moon">
+                        </label>
+                    </div>
+                    <a href="#" :class="[
+                    page === 'home' && !stickyMenu ? 'text-[rgb(255_255_255/1)] hover:text-[rgb(255_255_255/1)] !important' : '',
+                    page === 'home' && stickyMenu ? 'text-[rgb(121_128_138/1)] !important' : '']"
+                        class="font-medium text-[rgb(121_128_138/1)] hover:text-[rgb(78_107_255/1)]">Sign In</a>
+                    <a href="#"
+                        :class="{ 'bg-[rgb(255_255_255/0.15)]' : page === 'home', '!bg-[rgb(78_107_255/1)]' : page === 'home' && stickyMenu }"
+                        class="text-[rgb(255_255_255/1)] bg-[rgb(78_107_255/1)] text-base rounded-[9999px] flex items-center justify-center hover:shadow-[0px_10px_25px_rgba(78,107,255,0.2)] py-[0.75rem] px-[1.875rem]">Sign
+                        Up</a>
+                </div>
+            </div>
+        </div>
+    </header>
 
     <!-- CAROUSEL -->
-    <section></section>
+    <section
+        class="pt-[8.75rem] md:pt-[10rem] xl:pt-[13rem] pb-[5rem] lg:pb-[7.5rem] xl:pb-[14.75rem] relative overflow-hidden">
+        <div class="hidden md:block w-[50%] 2xl:w-[46.875rem] h-auto 2xl:h-[46.875rem] absolute right-0 top-0">
+            <div class="relative w-[100%] h-[100%]">
+                <img src="./img/shape-01.svg" alt="shape" class="hidden 2xl:block absolute top-[40%] left-[-10%] z-[1]">
+                <img src="./img/shape-02.svg" alt="shape" class="hidden 2xl:block absolute right-[20%] bottom-0 z-[10]">
+                <img src="./img/shape-03.svg" alt="shape"
+                    class="hidden 2xl:block absolute left-[15%] bottom-[10%] z-[10]">
+                <img src="./img/shape-04.svg" alt="shape" class="absolute right-0 top-0">
+                <img src="./img/hero.png" alt="woman" class="absolute right-0 top-0 z-[1]">
+            </div>
+        </div>
+        <div class="mx-auto max-w-[86.875rem] px-[1rem] md:px-[2rem] 2xl:px-0">
+            <div class="flex lg:items-center">
+                <div class="md:w-[50%] wow animate__animated animate__fadeInLeft animate__delay-1s animate__slow">
+                    <h1
+                        class="font-semibold text-[1.875rem] leading-[2.25rem] lg:text-[2.25rem] lg:leading-[2.5rem] xl:text-[50px] xl:leading-[62px] text-[rgb(24_28_49/1)] mb-[1.5rem]">
+                        We specialize in UI/UX, Web<br>Development, Digital<br>Marketing.</h1>
+                    <p class="xl:w-[79%]">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque fringilla magna mauris. Nulla
+                        fermentum viverra sem eu rhoncus consequat varius nisi quis, posuere magna.
+                    </p>
+                    <div class="flex flex-col-reverse lg:flex-row gap-[1.875rem] mt-[2.5rem]">
+                        <a href="#"
+                            class="font-medium leading-[1.75rem] text-[rgb(255_255_255/1)] bg-[rgb(78_107_255/1)] py-[0.75rem] px-[1.875rem] rounded-[9999px] ease-in-out duration-300 inline-flex w-fit hover:shadow-[0px_10px_25px_rgba(78,_107,_255,_0.2)]">Get
+                            Started Now</a>
+                        <span class="flex flex-col">
+                            <a href="#"
+                                class="inline-block font-medium text-[1.125rem] leading-[1.75rem] text-[rgb(24_28_49/1)] ">
+                                Call us (0123) 456 - 789 </a>
+                            <span class="inline-block">For any question or concern</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- SMALL FUTURE -->
-    <section></section>
+    <section>
+        <div
+            class="mr-auto ml-auto max-w-[86.875rem] pr-[1rem] pl-[1rem] md:pr-[1.875rem] md:pl-[1.875rem] 2xl:pr-[3.125rem] 2xl:pl-[3.125rem]">
+            <div
+                class="flex flex-wrap lg:!flex-nowrap justify-center lg:justify-between gap-[1.875rem] lg:gap-[1.25rem] xl:gap-[5.625rem]">
+
+                <div
+                    class="animate__animated animate__backInDown animate__slow wow md:w-[45%] lg:w-[33.33333%] flex gap-[1.25rem] xl:gap-[1.875rem]">
+                    <div
+                        class="flex items-center justify-center shrink-0 w-[5.25rem] h-[5.25rem] rounded-[9999px] bg-[rgb(243_106_141/1)]">
+                        <img src="./img/icon-01.svg" alt="Icon" />
+                    </div>
+                    <div>
+                        <h4
+                            class="font-medium text-[1.25rem] leading-[1.75rem] text-[rgb(24_28_49/1)] md:text-[26px] md:leading-[32px] mb-[0.625rem]">
+                            24/7 Support</h4>
+                        <p>Lorem ipsum dolor sit amet conse adipiscing elit.</p>
+                    </div>
+                </div>
+
+                <div
+                    class="animate__animated animate__backInDown animate__slow wow md:w-[45%] lg:w-[33.33333%] flex gap-[1.25rem] xl:gap-[1.875rem]">
+                    <div
+                        class="flex items-center justify-center shrink-0 w-[5.25rem] h-[5.25rem] rounded-[9999px] bg-[rgb(32_202_102/1)]">
+                        <img src="./img/icon-02.svg" alt="Icon" />
+                    </div>
+                    <div>
+                        <h4
+                            class="font-medium text-[1.25rem] leading-[1.75rem] text-[rgb(24_28_49/1)] md:text-[26px] md:leading-[32px] mb-[0.625rem]">
+                            Take Ownership</h4>
+                        <p>Lorem ipsum dolor sit amet conse adipiscing elit.</p>
+                    </div>
+                </div>
+
+                <div
+                    class="animate__animated animate__backInDown animate__slow wow md:w-[45%] lg:w-[33.33333%] flex gap-[1.25rem] xl:gap-[1.875rem]">
+                    <div
+                        class="flex items-center justify-center shrink-0 w-[5.25rem] h-[5.25rem] rounded-[9999px] bg-[rgb(250_145_97/1)]">
+                        <img src="./img/icon-03.svg" alt="Icon" />
+                    </div>
+                    <div>
+                        <h4
+                            class="font-medium text-[1.25rem] leading-[1.75rem] text-[rgb(24_28_49/1)] md:text-[26px] md:leading-[32px] mb-[0.625rem]">
+                            Team Work</h4>
+                        <p>Lorem ipsum dolor sit amet conse adipiscing elit.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- ABOUT US -->
-    <section></section>
+    <section
+        class="pt-[5rem] pb-[5rem] lg:pt-[6.25rem] lg:pb-[6.25rem] xl:pt-[7.5rem] xl:pb-[7.5rem] 2xl:pt-[8.75rem] 2xl:pb-[8.75rem] overflow-hidden">
+        <div
+            class="ml-auto mr-auto max-w-[86.875rem] pl-[1rem] pr-[1rem] md:pl=[2rem] md:pr-[2rem] xl:pr-[2.25rem] xl:pl-[2.25rem]">
+            <div class="flex items-center gap-[2rem] xl:gap-[7.5rem]">
+                <!-- About Images -->
+                <div
+                    class="animate__animated animate__fadeInLeft animate__slow wow hidden md:flex gap-[2rem] md:w-[50%] relative">
+                    <div>
+                        <img src="./img/shape-05.svg" alt="Shape" class="absolute left-[-1.25rem] top-[1.25rem]" />
+                        <img src="./img/about-01.png" alt="About" class="mb-[2rem]" />
+                        <img src="./img/about-02.png" alt="About" />
+                    </div>
+                    <div>
+                        <img src="./img/shape-06.svg" alt="Shape" />
+                        <img src="./img/about-03.png" alt="About" class="mt-[1.875rem] mb-[1.25rem]" />
+                        <img src="./img/shape-07.svg" alt="Shape" class="ml-auto mr-auto" />
+                    </div>
+                </div>
+
+                <!-- About Content -->
+                <div class="animate__animated animate__fadeInRight animate__slow wow md:w-[50%]">
+                    <h4 class="font-medium text-[1.25rem] text-[rgb(78_107_255/1)] mb-[1.25rem]">Why Choose Us</h4>
+                    <h2
+                        class="font-semibold text-[1.875rem] leading-[2.25rem] lg:text-[2.25rem] lg:leading-[2.5rem] xl:text-[45px] xl:leading-[55px] text-[rgb(24_28_49/1)] wm mb-[1.875rem]">
+                        We Make Our customers happy by giving Best services.</h2>
+                    <p class="lg:w-[95%]">It is a long established fact that a reader will be distracted by the readable
+                        content
+                        of a page when looking at its layout. The point of using Lorem Ipsum.</p>
+
+                    <a href="https://www.youtube.com/watch?v=yH9o_i-I5qA" data-fslightbox
+                        class="inline-flex items-center gap-[1.625rem] mt-[2.5rem]">
+                        <span
+                            class="flex items-center justify-center w-[3.125rem] h-[3.125rem] rounded-[9999px] relative bg-[rgb(78_107_255/1)] z-[1]">
+                            <span
+                                class="ping-animate absolute inline-flex h-[100%] w-[100%] rounded-[9999px] bg-[rgb(78_107_255/1)] opacity-[0.75] z-[-1]"></span>
+                            <img src="./img/icon-play.svg" alt="Play" />
+                        </span>
+                        <span class="text-[rgb(24_28_49/1)]">SEE HOW WE WORK</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- TEAM -->
-    <section></section>
+    <section
+        class="team relative overflow-hidden pt-[5rem] pb-[5rem] lg:pt-[6.25rem] lg:pb-[6.25rem] xl:pt-[7.5rem] xl:pb-[7.5rem]">
+        <span class="block absolute left-0 top-0 w-[100%] h-[60%] bg-[rgb(244_247_250/1)]"></span>
+        <img src="./img/shape-08.svg" alt="ShapeBg" class="absolute right-0 top-0" />
+        <img src="./img/shape-09.svg" alt="Shape" class="rotate-animate absolute left-[10%] top-[50%]" />
+        <img src="./img/shape-10.svg" alt="Shape" class="absolute left-[20%] top-[5%]" />
+        <img src="./img/shape-11.svg" alt="Shape" class="rotate-animate absolute right-[15%] top-[15%]" />
+
+        <!-- Section Title Start -->
+        <div
+            x-data="{ sectionTitle: 'Meet With Our Creative Dedicated Team', sectionTitleText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor eros. Donec vitae tortor lacus. Phasellus aliquam ante in maximus.'}">
+            <div
+                class="animate__animated animate__fadeInDown animate__slow mr-auto ml-auto max-w-[86.875rem] text-center pl-[1rem] pr-[1rem] md:pl-[2rem] md:pr-[2rem] xl:pl-0 xl:pr-0">
+                <h2 x-text="sectionTitle"
+                    class="font-semibold text-[1.875rem] leading-[2.25rem] xl:text-[45px] xl:leading-[55px] text-[rgb(24_28_49/1)] md:w-[80%] xl:w-[50%] ml-auto mr-auto mb-[1.125rem]">
+                </h2>
+                <p x-text="sectionTitleText" class="ml-auto mr-auto md:w-[80%] lg:w-[60%] xl:w-[46%]"></p>
+            </div>
+        </div>
+        <!-- Section Title End -->
+
+        <div
+            class="ml-auto mr-auto max-w-[86.875rem] relative z-[10] pl-[1rem] pr-[1rem] md:pl-[2rem] md:pr-[2rem] xl:pl-[6.5rem] xl:pr-[6.5rem] mt-[3.125rem] lg:mt-[4.375rem]">
+            <div class="grid grid-col-1 md:grid-cols-2 lg:grid-cols-3 gap-[2rem] lg:gap-[3.125rem]">
+                <!-- Team Item -->
+                <div class="text-center animate__animated animate__fadeInDown animate__slow wow">
+                    <div class="group relative overflow-hidden z-1">
+                        <img cgrouplass="w-[100%]" src="./img/team-01.png" alt="Team" />
+                        <div
+                            class="translate-y-[6.25rem] transform group-hover:translate-y-0 group-hover:transform ease-linear duration-300">
+                            <span
+                                class="absolute left-[-1.25rem] bottom-[-5.25rem] w-[120%] h-[9.375rem] bg-[rgb(78_107_255/1)] rotate-6 transform z-[20]"></span>
+                            <span
+                                class="absolute left-0 bottom-0 block w-[100%] h-[4.25rem] bg-[rgb(243_106_141/1)] z-[10]"></span>
+                            <div class="absolute left-0 bottom-0 w-[100%] pt-[1.875rem] pb-[1.25rem] z-[30]">
+                                <ul class="flex items-center justify-center gap-[2rem]">
+                                    <li>
+                                        <a href="#">
+                                            <svg class="fill-[#FFFFFF] hover:fill-[#F36A8D] ease-in-out duration-300"
+                                                width="10" height="18" viewBox="0 0 10 18" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M6.66634 10.25H8.74968L9.58301 6.91669H6.66634V5.25002C6.66634 4.39169 6.66634 3.58335 8.33301 3.58335H9.58301V0.783354C9.31134 0.74752 8.28551 0.666687 7.20218 0.666687C4.93968 0.666687 3.33301 2.04752 3.33301 4.58335V6.91669H0.833008V10.25H3.33301V17.3334H6.66634V10.25Z"
+                                                    fill="" />
+                                            </svg>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <svg class="fill-[#FFFFFF] hover:fill-[#F36A8D] ease-in-out duration-300"
+                                                width="18" height="14" viewBox="0 0 18 14" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M17.4683 1.71333C16.8321 1.99475 16.1574 2.17956 15.4666 2.26167C16.1947 1.82619 16.7397 1.14085 16.9999 0.333333C16.3166 0.74 15.5674 1.025 14.7866 1.17917C14.2621 0.617982 13.5669 0.245803 12.809 0.120487C12.0512 -0.00482822 11.2732 0.123742 10.596 0.486211C9.91875 0.848679 9.38024 1.42474 9.06418 2.12483C8.74812 2.82492 8.67221 3.60982 8.84825 4.3575C7.46251 4.28805 6.10686 3.92794 4.86933 3.30055C3.63179 2.67317 2.54003 1.79254 1.66492 0.715833C1.35516 1.24788 1.19238 1.85269 1.19326 2.46833C1.19326 3.67667 1.80826 4.74417 2.74326 5.36917C2.18993 5.35175 1.64878 5.20232 1.16492 4.93333V4.97667C1.16509 5.78142 1.44356 6.56135 1.95313 7.18422C2.46269 7.80709 3.17199 8.23456 3.96075 8.39417C3.4471 8.53337 2.90851 8.55388 2.38576 8.45417C2.60814 9.14686 3.04159 9.75267 3.62541 10.1868C4.20924 10.6209 4.9142 10.8615 5.64159 10.875C4.91866 11.4428 4.0909 11.8625 3.20566 12.1101C2.32041 12.3578 1.39503 12.4285 0.482422 12.3183C2.0755 13.3429 3.93 13.8868 5.82409 13.885C12.2349 13.885 15.7408 8.57417 15.7408 3.96833C15.7408 3.81833 15.7366 3.66667 15.7299 3.51833C16.4123 3.02514 17.0013 2.41418 17.4691 1.71417L17.4683 1.71333Z"
+                                                    fill="" />
+                                            </svg>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <svg class="fill-[#FFFFFF] hover:fill-[#F36A8D] ease-in-out duration-300"
+                                                width="17" height="16" viewBox="0 0 17 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M3.78353 2.16665C3.78331 2.60867 3.6075 3.03251 3.29478 3.34491C2.98207 3.65732 2.55806 3.8327 2.11603 3.83248C1.674 3.83226 1.25017 3.65645 0.937761 3.34373C0.625357 3.03102 0.449975 2.60701 0.450196 2.16498C0.450417 1.72295 0.626223 1.29912 0.93894 0.986712C1.25166 0.674307 1.67567 0.498925 2.1177 0.499146C2.55972 0.499367 2.98356 0.675173 3.29596 0.98789C3.60837 1.30061 3.78375 1.72462 3.78353 2.16665V2.16665ZM3.83353 5.06665H0.500195V15.5H3.83353V5.06665ZM9.1002 5.06665H5.78353V15.5H9.06686V10.025C9.06686 6.97498 13.0419 6.69165 13.0419 10.025V15.5H16.3335V8.89165C16.3335 3.74998 10.4502 3.94165 9.06686 6.46665L9.1002 5.06665V5.06665Z"
+                                                    fill="" />
+                                            </svg>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <h4
+                        class="text-[1.25rem] leading-[1.75rem] md:text-[26px] md:text-[32px] text-[rgb(24_28_49/1)] mt-[1.875rem] mb-[0.25rem]">
+                        Olivia Andrium</h4>
+                    <p>Product Manager</p>
+                </div>
+
+                <!-- Team Item -->
+                <div class="text-center animate__animated animate__fadeInDown animate__slow wow">
+                    <div class="group relative overflow-hidden z-1">
+                        <img class="vd" src="./img/team-02.png" alt="Team" />
+                        <div
+                            class="translate-y-[6.25rem] transform group-hover:translate-y-0 group-hover:transform ease-linear duration-300">
+                            <span
+                                class="absolute left-[-1.25rem] bottom-[-5.25rem] w-[120%] h-[9.375rem] bg-[rgb(78_107_255/1)] rotate-6 transform z-[20]"></span>
+                            <span
+                                class="absolute left-0 bottom-0 block w-[100%] h-[4.25rem] bg-[rgb(243_106_141/1)] z-[10]"></span>
+                            <div class="absolute left-0 bottom-0 w-[100%] pt-[1.875rem] pb-[1.25rem] z-[30]">
+                                <ul class="flex items-center justify-center gap-[2rem]">
+                                    <li>
+                                        <a href="#">
+                                            <svg class="fill-[#FFFFFF] hover:fill-[#F36A8D] ease-in-out duration-300"
+                                                width="10" height="18" viewBox="0 0 10 18" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M6.66634 10.25H8.74968L9.58301 6.91669H6.66634V5.25002C6.66634 4.39169 6.66634 3.58335 8.33301 3.58335H9.58301V0.783354C9.31134 0.74752 8.28551 0.666687 7.20218 0.666687C4.93968 0.666687 3.33301 2.04752 3.33301 4.58335V6.91669H0.833008V10.25H3.33301V17.3334H6.66634V10.25Z"
+                                                    fill="" />
+                                            </svg>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <svg class="fill-[#FFFFFF] hover:fill-[#F36A8D] ease-in-out duration-300"
+                                                width="18" height="14" viewBox="0 0 18 14" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M17.4683 1.71333C16.8321 1.99475 16.1574 2.17956 15.4666 2.26167C16.1947 1.82619 16.7397 1.14085 16.9999 0.333333C16.3166 0.74 15.5674 1.025 14.7866 1.17917C14.2621 0.617982 13.5669 0.245803 12.809 0.120487C12.0512 -0.00482822 11.2732 0.123742 10.596 0.486211C9.91875 0.848679 9.38024 1.42474 9.06418 2.12483C8.74812 2.82492 8.67221 3.60982 8.84825 4.3575C7.46251 4.28805 6.10686 3.92794 4.86933 3.30055C3.63179 2.67317 2.54003 1.79254 1.66492 0.715833C1.35516 1.24788 1.19238 1.85269 1.19326 2.46833C1.19326 3.67667 1.80826 4.74417 2.74326 5.36917C2.18993 5.35175 1.64878 5.20232 1.16492 4.93333V4.97667C1.16509 5.78142 1.44356 6.56135 1.95313 7.18422C2.46269 7.80709 3.17199 8.23456 3.96075 8.39417C3.4471 8.53337 2.90851 8.55388 2.38576 8.45417C2.60814 9.14686 3.04159 9.75267 3.62541 10.1868C4.20924 10.6209 4.9142 10.8615 5.64159 10.875C4.91866 11.4428 4.0909 11.8625 3.20566 12.1101C2.32041 12.3578 1.39503 12.4285 0.482422 12.3183C2.0755 13.3429 3.93 13.8868 5.82409 13.885C12.2349 13.885 15.7408 8.57417 15.7408 3.96833C15.7408 3.81833 15.7366 3.66667 15.7299 3.51833C16.4123 3.02514 17.0013 2.41418 17.4691 1.71417L17.4683 1.71333Z"
+                                                    fill="" />
+                                            </svg>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <svg class="fill-[#FFFFFF] hover:fill-[#F36A8D] ease-in-out duration-300"
+                                                width="17" height="16" viewBox="0 0 17 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M3.78353 2.16665C3.78331 2.60867 3.6075 3.03251 3.29478 3.34491C2.98207 3.65732 2.55806 3.8327 2.11603 3.83248C1.674 3.83226 1.25017 3.65645 0.937761 3.34373C0.625357 3.03102 0.449975 2.60701 0.450196 2.16498C0.450417 1.72295 0.626223 1.29912 0.93894 0.986712C1.25166 0.674307 1.67567 0.498925 2.1177 0.499146C2.55972 0.499367 2.98356 0.675173 3.29596 0.98789C3.60837 1.30061 3.78375 1.72462 3.78353 2.16665V2.16665ZM3.83353 5.06665H0.500195V15.5H3.83353V5.06665ZM9.1002 5.06665H5.78353V15.5H9.06686V10.025C9.06686 6.97498 13.0419 6.69165 13.0419 10.025V15.5H16.3335V8.89165C16.3335 3.74998 10.4502 3.94165 9.06686 6.46665L9.1002 5.06665V5.06665Z"
+                                                    fill="" />
+                                            </svg>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <h4
+                        class="text-[1.25rem] leading-[1.75rem] md:text-[26px] md:text-[32px] text-[rgb(24_28_49/1)] mt-[1.875rem] mb-[0.25rem]">
+                        Jemse Kemorun</h4>
+                    <p>Product Designer</p>
+                </div>
+
+                <!-- Team Item -->
+                <div class="text-center animate__animated animate__fadeInDown animate__slow wow">
+                    <div class="group relative overflow-hidden z-1">
+                        <img class="vd" src="./img/team-03.png" alt="Team" />
+                        <div
+                            class="translate-y-[6.25rem] transform group-hover:translate-y-0 group-hover:transform ease-linear duration-300">
+                            <span
+                                class="absolute left-[-1.25rem] bottom-[-5.25rem] w-[120%] h-[9.375rem] bg-[rgb(78_107_255/1)] rotate-6 transform z-[20]"></span>
+                            <span
+                                class="absolute left-0 bottom-0 block w-[100%] h-[4.25rem] bg-[rgb(243_106_141/1)] z-[10]"></span>
+                            <div class="absolute left-0 bottom-0 w-[100%] pt-[1.875rem] pb-[1.25rem] z-[30]">
+                                <ul class="flex items-center justify-center gap-[2rem]">
+                                    <li>
+                                        <a href="#">
+                                            <svg class="fill-[#FFFFFF] hover:fill-[#F36A8D] ease-in-out duration-300"
+                                                width="10" height="18" viewBox="0 0 10 18" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M6.66634 10.25H8.74968L9.58301 6.91669H6.66634V5.25002C6.66634 4.39169 6.66634 3.58335 8.33301 3.58335H9.58301V0.783354C9.31134 0.74752 8.28551 0.666687 7.20218 0.666687C4.93968 0.666687 3.33301 2.04752 3.33301 4.58335V6.91669H0.833008V10.25H3.33301V17.3334H6.66634V10.25Z"
+                                                    fill="" />
+                                            </svg>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <svg class="fill-[#FFFFFF] hover:fill-[#F36A8D] ease-in-out duration-300"
+                                                width="18" height="14" viewBox="0 0 18 14" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M17.4683 1.71333C16.8321 1.99475 16.1574 2.17956 15.4666 2.26167C16.1947 1.82619 16.7397 1.14085 16.9999 0.333333C16.3166 0.74 15.5674 1.025 14.7866 1.17917C14.2621 0.617982 13.5669 0.245803 12.809 0.120487C12.0512 -0.00482822 11.2732 0.123742 10.596 0.486211C9.91875 0.848679 9.38024 1.42474 9.06418 2.12483C8.74812 2.82492 8.67221 3.60982 8.84825 4.3575C7.46251 4.28805 6.10686 3.92794 4.86933 3.30055C3.63179 2.67317 2.54003 1.79254 1.66492 0.715833C1.35516 1.24788 1.19238 1.85269 1.19326 2.46833C1.19326 3.67667 1.80826 4.74417 2.74326 5.36917C2.18993 5.35175 1.64878 5.20232 1.16492 4.93333V4.97667C1.16509 5.78142 1.44356 6.56135 1.95313 7.18422C2.46269 7.80709 3.17199 8.23456 3.96075 8.39417C3.4471 8.53337 2.90851 8.55388 2.38576 8.45417C2.60814 9.14686 3.04159 9.75267 3.62541 10.1868C4.20924 10.6209 4.9142 10.8615 5.64159 10.875C4.91866 11.4428 4.0909 11.8625 3.20566 12.1101C2.32041 12.3578 1.39503 12.4285 0.482422 12.3183C2.0755 13.3429 3.93 13.8868 5.82409 13.885C12.2349 13.885 15.7408 8.57417 15.7408 3.96833C15.7408 3.81833 15.7366 3.66667 15.7299 3.51833C16.4123 3.02514 17.0013 2.41418 17.4691 1.71417L17.4683 1.71333Z"
+                                                    fill="" />
+                                            </svg>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <svg class="fill-[#FFFFFF] hover:fill-[#F36A8D] ease-in-out duration-300"
+                                                width="17" height="16" viewBox="0 0 17 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M3.78353 2.16665C3.78331 2.60867 3.6075 3.03251 3.29478 3.34491C2.98207 3.65732 2.55806 3.8327 2.11603 3.83248C1.674 3.83226 1.25017 3.65645 0.937761 3.34373C0.625357 3.03102 0.449975 2.60701 0.450196 2.16498C0.450417 1.72295 0.626223 1.29912 0.93894 0.986712C1.25166 0.674307 1.67567 0.498925 2.1177 0.499146C2.55972 0.499367 2.98356 0.675173 3.29596 0.98789C3.60837 1.30061 3.78375 1.72462 3.78353 2.16665V2.16665ZM3.83353 5.06665H0.500195V15.5H3.83353V5.06665ZM9.1002 5.06665H5.78353V15.5H9.06686V10.025C9.06686 6.97498 13.0419 6.69165 13.0419 10.025V15.5H16.3335V8.89165C16.3335 3.74998 10.4502 3.94165 9.06686 6.46665L9.1002 5.06665V5.06665Z"
+                                                    fill="" />
+                                            </svg>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <h4
+                        class="text-[1.25rem] leading-[1.75rem] md:text-[26px] md:text-[32px] text-[rgb(24_28_49/1)] mt-[1.875rem] mb-[0.25rem]">
+                        Avi Pestarica</h4>
+                    <p>Web Designer</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- SERVICE -->
     <section></section>
@@ -51,6 +508,26 @@
 
     <!-- FOOTER -->
     <section></section>
+
+
+    <!-- JQUERY -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- WOW JS -->
+    <script src="./libs/wowJs/wow.min.js"></script>
+    <script>
+        new WOW().init();
+    </script>
+
+    <!-- FSLIGHTBOX -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fslightbox/3.5.0/index.js"
+        integrity="sha512-D89OevZIQmJR0URCVdZubolGogiDaSD+Wrt6qRllmk4RIdNU1aKh1/7CsUzX35zsEQwWHBF9bVnsUSO5Rm4Fjw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- FLOWBITE -->
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
 
 </body>
 
