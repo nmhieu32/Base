@@ -1,0 +1,77 @@
+body {
+    margin: 0;
+    line-height: inherit;
+}
+body {
+    position: relative;
+    z-index: 1;
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 26px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Outfit", sans-serif;
+}
+
+svg, video, canvas, audio, iframe, object, embed, i{
+    display: block;
+    vertical-align: middle;
+}
+
+button, [role="button"] {
+    cursor: pointer;
+}
+
+button, [type='button'], [type='reset'], [type='submit'] {
+    -webkit-appearance: button;
+    background-color: transparent;
+    background-image: none;
+}
+
+button, select {
+    text-transform: none;
+}
+
+button, input, optgroup, select, textarea {
+    font-family: inherit;
+    font-size: 100%;
+    font-weight: inherit;
+    line-height: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+ol, ul, menu {
+    list-style: none;
+    margin: 0;
+}
+
+.ping-animate {
+    animation: ud-ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.rotate-animate {
+    animation: ud-rotate 30s linear infinite;;
+}
+
+@keyframes ud-ping {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    75%, 100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+@keyframes ud-rotate {
+    0%, 100% {
+        transform: rotate(360deg);
+    }
+    50% {
+        transform: rotate(0deg);
+    }
+}
