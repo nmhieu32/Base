@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz@0,14..32;1,14..32&display=swap"
         rel="stylesheet">
+    <link rel="shortcut icon" href="./img/thunder.png" type="image/x-icon">
 
     <!-- TAILWIND -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
@@ -37,11 +38,11 @@
     :class="{'b bg-[rgb(24_28_49/1)]': darkMode === true}" style="height: 100%;" class="text-[rgb(121_128_138)]">
 
     <!-- HEADER -->
-    <header class="w-[100%] pt-[1.75rem] pb-[1.75rem] top-0 left-0 fixed z-99999"
+    <header class="w-[100%] pt-[1.75rem] pb-[1.75rem] top-[0px] left-[0px] fixed z-[99999]"
         :class="{ 'bg-[rgb(255_255_255/1)] bg-[rgb(24_28_49/1)] !shadow-sm py-[1rem] transition-all duration-150 ease-in-out duration-100' : stickyMenu }"
         @scroll.window="stickyMenu = (window.pageYOffset > 20) ? true : false">
         <div
-            class="mx-auto max-w-[86.874rem] px-[1rem] md:px-[2rem] 2xl:px-0 lg:flex items-center justify-between relative">
+            class="mr-auto ml-auto max-w-[86.874rem] px-[1rem] md:px-[2rem] 2xl:px-0 lg:flex items-center justify-between relative">
             <div class="w-[100%] lg:w-[25%] flex items-center justify-between">
                 <a href="./index.html">
                     <img class="block" src="./img/logo-light.svg" alt="Light">
@@ -155,14 +156,14 @@
     <!-- CAROUSEL -->
     <section
         class="pt-[8.75rem] md:pt-[10rem] xl:pt-[13rem] pb-[5rem] lg:pb-[7.5rem] xl:pb-[14.75rem] relative overflow-hidden">
-        <div class="hidden md:block w-[50%] 2xl:w-[46.875rem] h-auto 2xl:h-[46.875rem] absolute right-0 top-0">
+        <div class="hidden md:block w-[50%] 2xl:w-[46.875rem] h-auto 2xl:!h-[46.875rem] absolute right-0 top-0">
             <div class="relative w-[100%] h-[100%]">
                 <img src="./img/shape-01.svg" alt="shape" class="hidden 2xl:block absolute top-[40%] left-[-10%] z-[1]">
                 <img src="./img/shape-02.svg" alt="shape" class="hidden 2xl:block absolute right-[20%] bottom-0 z-[10]">
                 <img src="./img/shape-03.svg" alt="shape"
                     class="hidden 2xl:block absolute left-[15%] bottom-[10%] z-[10]">
                 <img src="./img/shape-04.svg" alt="shape" class="absolute right-0 top-0">
-                <img src="./img/hero.png" alt="woman" class="absolute right-0 top-0 z-[1]">
+                <img src="./img/hero.png" alt="Woman" class="absolute right-0 top-0 z-[1]">
             </div>
         </div>
         <div class="mx-auto max-w-[86.875rem] px-[1rem] md:px-[2rem] 2xl:px-0">
@@ -300,7 +301,7 @@
 
         <!-- Section Title Start -->
         <div
-            x-data="{ sectionTitle: 'Meet With Our Creative Dedicated Team', sectionTitleText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor eros. Donec vitae tortor lacus. Phasellus aliquam ante in maximus.'}">
+            x-data="{ sectionTitle: `Meet With Our Creative Dedicated Team`, sectionTitleText: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor eros. Donec vitae tortor lacus. Phasellus aliquam ante in maximus.`}">
             <div
                 class="animate__animated animate__fadeInDown animate__slow mr-auto ml-auto max-w-[86.875rem] text-center pl-[1rem] pr-[1rem] md:pl-[2rem] md:pr-[2rem] xl:pl-0 xl:pr-0">
                 <h2 x-text="sectionTitle"
@@ -313,7 +314,7 @@
 
         <div
             class="ml-auto mr-auto max-w-[86.875rem] relative z-[10] pl-[1rem] pr-[1rem] md:pl-[2rem] md:pr-[2rem] xl:pl-[6.5rem] xl:pr-[6.5rem] mt-[3.125rem] lg:mt-[4.375rem]">
-            <div class="grid grid-col-1 md:grid-cols-2 lg:grid-cols-3 gap-[2rem] lg:gap-[3.125rem]">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[2rem] lg:gap-[3.125rem]">
                 <!-- Team Item -->
                 <div class="text-center animate__animated animate__fadeInDown animate__slow wow">
                     <div class="group relative overflow-hidden z-1">
@@ -483,10 +484,152 @@
     </section>
 
     <!-- SERVICE -->
-    <section></section>
+    <section class="pb-[1.875rem] lg:pb-[3.125rem] xl:pb-[4.375rem]">
+
+        <div
+            x-data="{ sectionTitle: 'We Offer The Best Quality Service for You', sectionTitleText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor eros. Donec vitae tortor lacus. Phasellus aliquam ante in maximus.'}">
+            <div
+                class="animate__animated animate__fadeInDown animate__slow wow ml-auto mr-auto max-w-[86.875rem] text-center pl-[1rem] pr-[1rem] md:pl-[2rem] md:pr-[2rem] xl:pl-0 xl:pr-0">
+                <h2 x-text="sectionTitle"
+                    class="font-semibold text-[1.875rem] leading-[2.25rem] xl:text-[45px] xl:leading-[55px] text-[rgb(24_28_49/1)] md:w-[80%] xl:w-[50%] ml-auto mr-auto mb-[1.125rem]">
+                </h2>
+                <p class="ml-auto mr-auto md:w-[80%] lg:w-[60%] xl:w-[46%]" x-text="sectionTitleText"></p>
+            </div>
+        </div>
+
+        <div
+            class="ml-auto mr-auto max-w-[86.875rem] pl-[1rem] pr-[1rem] md:pl-[2rem] md:pr-[2rem] xl:pl-[5.25rem] xl:pr-[5.25rem] mt-[2.5rem] md:mt-[1.25rem]">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-[0px]">
+                <div
+                    class="animate__animated animate__fadeInDown animate__slow wow rounded-[0.5rem] pt-[3.125rem] pb-[3.125rem] pl-[2rem] pr-[2rem] xl:pl-[3.125rem] xl:pr-[3.125rem] ease-in-out duration-300 hover:shadow-[0px_6px_90px_rgba(8,_14,_40,_0.04)]">
+                    <img src="./img/icon-04.svg" alt="Icon" />
+                    <h4
+                        class="font-semibold text-[26px] leading-[32px] text-[rgb(24_28_49/1)] mt-[2.75rem] mb-[1.125rem]">
+                        Crafted for Startups</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor.</p>
+                </div>
+
+                <div
+                    class="animate__animated animate__fadeInDown animate__slow wow rounded-[0.5rem] pt-[3.125rem] pb-[3.125rem] pl-[2rem] pr-[2rem] xl:pl-[3.125rem] xl:pr-[3.125rem] ease-in-out duration-300 hover:shadow-[0px_6px_90px_rgba(8,_14,_40,_0.04)]">
+                    <img src="./img/icon-05.svg" alt="Icon" />
+                    <h4
+                        class="font-semibold text-[26px] leading-[32px] text-[rgb(24_28_49/1)] mt-[2.75rem] mb-[1.125rem]">
+                        High-quality Design</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor.</p>
+                </div>
+
+                <div
+                    class="animate__animated animate__fadeInDown animate__slow wow rounded-[0.5rem] pt-[3.125rem] pb-[3.125rem] pl-[2rem] pr-[2rem] xl:pl-[3.125rem] xl:pr-[3.125rem] ease-in-out duration-300 hover:shadow-[0px_6px_90px_rgba(8,_14,_40,_0.04)]">
+                    <img src="./img/icon-06.svg" alt="Icon" />
+                    <h4
+                        class="font-semibold text-[26px] leading-[32px] text-[rgb(24_28_49/1)] mt-[2.75rem] mb-[1.125rem]">
+                        All Essential Sections</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor.</p>
+                </div>
+
+                <div
+                    class="animate__animated animate__fadeInDown animate__slow wow rounded-[0.5rem] pt-[3.125rem] pb-[3.125rem] pl-[2rem] pr-[2rem] xl:pl-[3.125rem] xl:pr-[3.125rem] ease-in-out duration-300 hover:shadow-[0px_6px_90px_rgba(8,_14,_40,_0.04)]">
+                    <img src="./img/icon-07.svg" alt="Icon" />
+                    <h4
+                        class="font-semibold text-[26px] leading-[32px] text-[rgb(24_28_49/1)] mt-[2.75rem] mb-[1.125rem]">
+                        Speed Optimized</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor.</p>
+                </div>
+
+                <div
+                    class="animate__animated animate__fadeInDown animate__slow wow rounded-[0.5rem] pt-[3.125rem] pb-[3.125rem] pl-[2rem] pr-[2rem] xl:pl-[3.125rem] xl:pr-[3.125rem] ease-in-out duration-300 hover:shadow-[0px_6px_90px_rgba(8,_14,_40,_0.04)]">
+                    <img src="./img/icon-05.svg" alt="Icon" />
+                    <h4
+                        class="font-semibold text-[26px] leading-[32px] text-[rgb(24_28_49/1)] mt-[2.75rem] mb-[1.125rem]">
+                        Fully Customizable</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor.</p>
+                </div>
+
+                <div
+                    class="animate__animated animate__fadeInDown animate__slow wow rounded-[0.5rem] pt-[3.125rem] pb-[3.125rem] pl-[2rem] pr-[2rem] xl:pl-[3.125rem] xl:pr-[3.125rem] ease-in-out duration-300 hover:shadow-[0px_6px_90px_rgba(8,_14,_40,_0.04)]">
+                    <img src="./img/icon-06.svg" alt="Icon" />
+                    <h4
+                        class="font-semibold text-[26px] leading-[32px] text-[rgb(24_28_49/1)] mt-[2.75rem] mb-[1.125rem]">
+                        Regular Updates</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- PRICE -->
-    <section></section>
+    <section x-data="setup()"
+        class="relative overflow-hidden bg-[rgb(244_247_250/1)] rm pt-[5rem] pb-[5rem] lg:pt-[6.25rem] lg:pb-[6.25rem] xl:pt-[7.5rem] xl:pb-[7.5rem]">
+        <img src="./img/shape-06.svg" alt="Shape" class="absolute top-[5%] left-[10%]" />
+        <img src="./img/shape-03.svg" alt="Shape" class="absolute top-[25%] right-[20%]" />
+        <img src="./img/shape-07.svg" alt="Shape" class="absolute bottom-[10%] right-[5%] w-[6.25rem]" />
+        <img src="./img/shape-12.svg" alt="Shape" class="absolute bottom-[0px] left-[0px]" />
+        <img src="./img/shape-13.svg" alt="Shape" class="absolute top-[0px] right-[0px]" />
+
+        <div
+            x-data="{ sectionTitle: `We Offer Great Affordable Premium Prices.`, sectionTitleText: `It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using.`}">
+            <div
+                class="animate__animated animate__fadeInDown animate__slow wow mr-auto ml-auto max-w-[86.875rem] text-center pr-[1rem] pl-[1rem] md:pr-[2rem] md:pl-[2rem] xl:pl-[0px] xl:pr-[0px]">
+                <h2 x-text="sectionTitle"
+                    class="font-semibold text-[1.875rem] leading-[2.25rem] xl:text-[45px] xl:leading-[55px] text-[rgb(24_28_49/1)] md:w-[80%] xl:w-[50%] mr-auto ml-auto mb-[1.125rem]">
+                </h2>
+                <p class="mr-auto ml-auto md:w-[80%] lg:w-[60%] xl:2-[46%]" x-text="sectionTitleText"></p>
+            </div>
+        </div>
+
+        <div class="flex items-center justify-center mt-[3.125rem] space-x-[1rem]">
+            <span class="font-semibold text-[rgb(24_28_49/1)]">Bill Monthly</span>
+            <button
+                class="relative rounded-[9999px] focus:outline focus:outline-2 focus:outline-transparent focus:outline-offset-2"
+                x-cloak @click="billPlan == 'monthly' ? billPlan = 'annually' : billPlan = 'monthly'">
+                <div
+                    class="w-[2.75rem] h-[1.5rem] transition-all duration-150 ease-in-out bg-[rgb(78_107_255/1)] rounded-[9999px] shadow-md outline-none">
+                </div>
+                <div class="absolute inline-flex items-center justify-center w-[1.125rem] h-[1.125rem] transition-all duration-200 ease-in-out transform bg-[rgb(255_255_255/1)] rounded-[9999px] shadow-xs top-[3px] left-[0.25rem]"
+                    :class="{ 'translate-x-[0px] transform': billPlan == 'monthly', 'translate-x-[1.125rem] transform': billPlan == 'annually' }">
+                </div>
+            </button>
+            <span class="font-semibold text-[rgb(24_28_49/1)]">Bill Annually</span>
+        </div>
+
+        <div
+            class="mr-auto ml-auto max-w-[86.875rem] relative z-[10] pr-[1rem] pl-[1rem] md:pr-[2rem] md:pl-[2rem] xl:pl-[5.25rem] xl:pr-[5.25rem] mt-[3.75rem]">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[2.5rem]">
+                <template x-for="(plan, i) in plans" x-key="i">
+
+                    <div
+                        class="animate__animated animate__fadeInDown animate__slow wow text-center rounded-2 bg-[rgb(255_255_255/1)] shadow-[0px_8px_70px_rgba(0,_0,_0,_0.05)] pl-[1.875rem] pr-[1.875rem] pt-[2.75rem] pb-[2.5rem]">
+                        <h4 x-text="plan.name" class="text-[22px] leading-[26px] text-[rgb(24_28_49/1)] mb-[2.5rem]">
+                        </h4>
+
+                        <div class="flex items-center justify-center gap-[0.375rem] mb-[0.375rem]">
+                            <h2 :class="plan.name == 'Basic' ? 'text-green-500' : ''"
+                                x-text="`$${billPlan == 'monthly' ? plan.price.monthly : plan.price.annually}`"
+                                class="font-semibold text-[40px] leading-[42px] text-[rgb(24_28_49/1)]"></h2>
+                            <span x-text="billPlan == 'monthly' ? '/per month' : '/per year'"
+                                class="inline-block text-[0.875rem] leading-[1.25rem] text-[rgb(24_28_49/1)]"></span>
+                        </div>
+
+                        <p class=" mb-[2.375rem]">No credit card required</p>
+
+                        <a href="#"
+                            class="font-semibold rounded-full text-white ease-in-out duration-300 pt-[0.75rem] pb-[0.75rem] pl-[3.25rem] pr-[3.25rem]"
+                            :class="plan.name == 'Growth Plan' ? 'bg-[rgb(78_107_255/1)] hover:bg-[rgb(243_106_141/1)]' : 'bg-[rgb(243_106_141/1)] hover:bg-[rgb(78_107_255/1)]'">
+                            Try for free
+                        </a>
+
+                        <ul class="flex flex-col gap-[0.75rem] mt-[1.875rem] mb-[2.5rem]">
+                            <template x-for="(feature, i) in plan.features" x-key="i">
+                                <li x-text="feature"></li>
+                            </template>
+                        </ul>
+
+                        <p class="text-[rgb(24_28_49/1)]">7-day free trial</p>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </section>
 
     <!-- PRODUCT -->
     <section></section>
@@ -509,6 +652,16 @@
     <!-- FOOTER -->
     <section></section>
 
+    <!-- Back To Top -->
+    <button
+        class="hidden items-center justify-center w-[2.5rem] h-[2.5rem] rounded-[4px] !bg-[rgb(78_107_255/1)] fixed bottom-[2rem] right-[2rem] z-[999]"
+        @click="window.scrollTo({top: 0, behavior: 'smooth'})"
+        @scroll.window="scrollTop = (window.pageYOffset > 50) ? true : false" :class="{ '!flex' : scrollTop }">
+        <svg class="fill-[#FFFFFF] w-[1.25rem] h-[1.25rem]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path
+                d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z" />
+        </svg>
+    </button>
 
     <!-- JQUERY -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
@@ -519,6 +672,44 @@
     <script src="./libs/wowJs/wow.min.js"></script>
     <script>
         new WOW().init();
+    </script>
+
+    <!-- PRICE -->
+    <script>
+        const setup = () => {
+            return {
+                isNavOpen: false,
+
+                billPlan: 'monthly',
+
+                plans: [
+                    {
+                        name: 'Starter',
+                        price: {
+                            monthly: 29,
+                            annually: 29 * 12 - 199,
+                        },
+                        features: ['400 GB Storaget', 'Unlimited Photos & Videos', 'Exclusive Support'],
+                    },
+                    {
+                        name: 'Growth Plan',
+                        price: {
+                            monthly: 59,
+                            annually: 59 * 12 - 100,
+                        },
+                        features: ['400 GB Storaget', 'Unlimited Photos & Videos', 'Exclusive Support'],
+                    },
+                    {
+                        name: 'Business',
+                        price: {
+                            monthly: 139,
+                            annually: 139 * 12 - 100,
+                        },
+                        features: ['400 GB Storaget', 'Unlimited Photos & Videos', 'Exclusive Support'],
+                    },
+                ],
+            };
+        };
     </script>
 
     <!-- FSLIGHTBOX -->
